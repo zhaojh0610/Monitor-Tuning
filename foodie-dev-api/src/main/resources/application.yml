@@ -82,7 +82,7 @@ management:
 info:
   author: zhaojh
   e-mail: zhaojh0610@163.com
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8989/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8989/eureka
