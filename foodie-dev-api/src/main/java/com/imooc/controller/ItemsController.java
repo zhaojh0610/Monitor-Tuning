@@ -1,10 +1,12 @@
 package com.imooc.controller;
 
-import com.imooc.enums.YesOrNo;
-import com.imooc.pojo.*;
-import com.imooc.pojo.vo.*;
-import com.imooc.service.CarouselService;
-import com.imooc.service.CategoryService;
+import com.imooc.pojo.Items;
+import com.imooc.pojo.ItemsImg;
+import com.imooc.pojo.ItemsParam;
+import com.imooc.pojo.ItemsSpec;
+import com.imooc.pojo.vo.CommentLevelCountsVO;
+import com.imooc.pojo.vo.ItemInfoVO;
+import com.imooc.pojo.vo.ShopcartVO;
 import com.imooc.service.ItemService;
 import com.imooc.utils.IMOOCJSONResult;
 import com.imooc.utils.PagedGridResult;
@@ -13,13 +15,19 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
 import java.util.List;
 
+/**
+ * @author zhaojh
+ */
 @Api(value = "商品接口", tags = {"商品信息展示的相关接口"})
 @RestController
 @RequestMapping("items")
+@Validated
 public class ItemsController extends BaseController {
 
     @Autowired
@@ -138,7 +146,7 @@ public class ItemsController extends BaseController {
             @ApiParam(name = "page", value = "查询下一页的第几页", required = false)
             @RequestParam Integer page,
             @ApiParam(name = "pageSize", value = "分页的每一页显示的条数", required = false)
-            @RequestParam Integer pageSize) {
+            @RequestParam @Max(100) Integer pageSize) {
 
         if (catId == null) {
             return IMOOCJSONResult.errorMsg(null);
